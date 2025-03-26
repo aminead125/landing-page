@@ -1,0 +1,614 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: none;
+  text-decoration: none;
+  list-style: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+body{
+  background-color: #cfe8f5;
+}
+header{
+  position: relative;
+  margin: 1.5rem;
+  background-image: url(images/header1.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 1rem;
+  height: 100vh;
+  z-index: 0;
+}
+header nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.7rem;
+}
+header nav ul{
+  display: flex;
+}
+header nav ul li{
+  margin: 0 1rem;
+  font-size: 1.2rem;
+}
+header nav ul li a{
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-weight: 600;
+font-size: 1rem;
+color: aliceblue;
+transition: .6s;
+cursor: pointer;
+}
+header nav ul li a:hover{
+  color: #296ce8;
+  transition: .6s;
+}
+.reseau ul li a{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: aliceblue;
+  transition: .6s;
+  cursor: pointer;
+  }
+ .reseau ul li a:hover{
+    color: rgb(41, 108, 232);
+    transition: .6s;
+  }
+  .container{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+
+  }
+  .text h2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 3rem;
+  color: aliceblue;
+  transition: .6s;
+  text-align: center;
+  
+  }
+  .text p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #a9a8a8;
+
+  }
+  .text h2,
+.text p {
+  position: relative; /* Pour que le z-index fonctionne */
+  z-index: 1; /* Au-dessus de l'image */
+}
+  .container div button{
+    padding: 1rem;
+    border-radius: 25px;
+    border: none !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #002B4B;
+    transition: 0.6s;
+    cursor: pointer;
+  }
+  .container div button:hover{
+background-color: #002B4B;
+    color: rgb(255, 255, 255);
+    scale: 110%;
+    box-shadow: #03423b;
+    transition: 0.6s;
+  }
+  .container div .btn-pos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+.about{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  margin: 4rem 1.7rem;
+  gap: 2rem;
+  background-color: #cfe8f5;
+  overflow: hidden;
+}
+.about .gauche {
+  margin: 4rem 0;
+}
+.about h4.roboto-mono-style {
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: #131313;
+    margin: 1rem 0;
+  }
+
+  .gauche h2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+  color: #131313;
+  margin-bottom: 2rem;
+  }
+
+.gauche ul li{
+  display: flex;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #131313;
+  margin-bottom: 1rem;
+  }
+  .gauche ul li span{
+  padding:0 8px 0 0;
+    }
+    .gauche ul li span img{
+      width: 48px;
+      height: auto !important;
+      filter: invert(23%) sepia(79%) saturate(1581%) hue-rotate(171deg) brightness(91%) contrast(86%);
+        }
+.gauche ul li span img.ic3{
+  width: 46px;
+      height: auto !important;
+}
+.gauche ul li div h4 {
+  padding-top: 6px;
+      font-size: 1.5rem;
+      color: #131313;
+      margin-bottom: 0.7rem;
+    }
+.gauche ul li div p {
+      font-size: 1.2rem;
+      color: #242424;
+      font-weight: 450;
+    }
+    .img {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      bottom: 5%;
+      right: 1%;
+
+    }
+    .img img {
+      position: absolute;
+      width: auto !important;
+      height: 45vh;
+      transform: rotate(-90deg);  
+      z-index: -1;
+    }
+    .droit {
+      display: flex;
+      justify-content: center;
+    }
+    .droit img {
+      width: auto !important;
+      height: 75vh;
+    }
+    .section2{
+      margin: 5rem 1.7rem;
+    }
+
+.section2 h2{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-weight: 600;
+font-size: 2.7rem;
+color: #131313;
+margin-bottom: 2rem;
+text-align: center;
+}
+.section2 p{
+  margin: 4rem 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.4rem;
+  color: #242424;
+  font-weight: 450;
+margin-bottom: 2rem;
+text-align: center;
+}
+
+.cardv {
+  background-color: #ffffff;
+  border-radius: 25px;
+  padding: 2rem; 
+  width: 80%;
+  
+  margin: 4rem auto;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+}
+.logo p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: floralwhite;
+  margin-right: 10rem;
+}
+.video {
+  width: 100%;
+  height: 65vh;          
+  border-radius: 15px;    
+}
+
+.contact-card {
+  display: grid;                          /* Utilisation de CSS Grid */
+  grid-template-columns: 1fr 1fr;         /* Deux colonnes : image / contenu */
+  max-width: 1200px;                      /* Largeur max pour centrer le contenu */
+  margin: 2rem auto;                      /* Centre horizontalement + espace vertical */                /* Fond blanc */
+  border-radius: 1rem;                    /* Angles arrondis */
+  overflow: hidden;                       /* Pour masquer les débordements éventuels */
+}
+
+.contact-left {
+  background-color: #ffffff;              /* Léger fond gris pour contraster */
+  display: flex;                          /* Pour centrer l'image */
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;   
+  border-radius: 25px;                    /* Largeur minimale pour l'image */
+}
+
+.contact-left img {
+  width: 100%;
+  max-width: 400px;
+  height: 75vh;                       /* Ajuste la taille max de l'image */
+  object-fit: cover;                      /* Conserve le ratio de l'image */
+  border-radius: 25px;                  /* Coins légèrement arrondis */
+}
+.prim{
+  height: auto !important;
+  width: 50% !important;
+}
+.contact-right {
+  display: flex;                          /* On peut disposer le texte en colonne */
+  flex-direction: column;
+  justify-content: flex-start;            /* Le contenu reste en haut */
+  align-items: flex-end;                  /* Aligne le texte à droite */
+  padding: 2rem;
+}
+
+/* Pour aligner le texte à droite si besoin */
+.contact-right h2,
+.contact-right p {
+  margin: 0;                              /* Réinitialise les marges par défaut */
+  margin-bottom: 1rem;
+}
+.t{
+  display: flex;
+  justify-content: space-between;
+
+}
+.contact-right h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #333;
+  transition: 0.5s;
+}
+
+.contact-right p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+.t p {
+  margin-top: 0.8rem;
+  font-size: 1.3rem;
+  transition: 0.5s;
+}
+.pri {
+  color: #296ce8;
+}
+.info .p{
+  font-size: 1.3rem;
+}
+/* Bouton de contact */
+.contact-button {
+  background-color: #296ce8;     
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:0.5s;
+  height: 50px;
+  padding:0 1.5rem;
+  margin-bottom: 0.4rem;
+
+}
+.t h2:hover{
+  color: #296ce8;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.t p:hover{
+  color: #296ce8;
+  transition: 0.5s;
+}
+.contact-button:hover {
+  scale: 1.1;
+  transition: 0.5s;
+  background-color: #296ce8;     
+}
+
+/* --- Adaptation pour petits écrans --- */
+@media (max-width: 768px) {
+  .contact-card {
+    grid-template-columns: 1fr;           /* Passe en une colonne sur mobile */
+  }
+  .contact-left,
+  .contact-right {
+    min-width: 100%;
+    justify-content: center;              /* Centrer sur mobile */
+    align-items: center;
+  }
+  /* Réajustement du texte en mode colonne */
+  .contact-right {
+    align-items: center;                 
+  }
+  .contact-right h2,
+  .contact-right p {
+    text-align: center;                   /* Au centre sur mobile */
+  }
+}
+
+/* Carte du formulaire */
+.form-container .card {
+  margin-top: 2rem;
+  width: 100%;
+  background-color: hsl(0, 0%, 100%); /* bg-gray-800 */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+ .card h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #333;
+  transition: 0.5s;
+}   
+.card h2:hover{
+  color: #296ce8;
+  transition: 0.5s;
+} 
+form {
+  display: flex;
+  flex-direction: column;
+}
+/* Ligne pour les deux premiers inputs */
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.row input {
+  width: 50%;
+}
+/* Styles communs pour inputs, select et textarea */
+input[type="text"],
+input[type="tel"]
+ {
+  background-color: #EEEEEE; /* bg-gray-700 */
+  color: #525252; /* text-gray-200 */
+  border: none;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+}
+textarea{
+  background-color: #EEEEEE; /* bg-gray-700 */
+  border: none;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+}
+select{
+  background-color: #EEEEEE;
+  color: #6c6c6c;
+  border: none;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+}
+/* Focus sur les champs */
+input[type="text"]:focus,
+input[type="tel"]:focus
+ {
+  background-color: #EEEEEE; /* bg-gray-600 */
+  outline: none;
+  box-shadow: 0 0 0 1px #3B82F6; /* focus:ring-blue-500 */
+  color: #525252;
+}
+.form-container {
+  display: none;
+}
+
+textarea:focus{
+  outline: none;
+  border: none !important;
+}
+textarea {
+  resize: none;
+  height: 6rem;
+}
+/* Bouton */
+button {
+  background: linear-gradient(to right, #6366F1, #3B82F6); /* de-indigo-500 à blue-500 */
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.3s;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+.form-container button:hover {
+  background: linear-gradient(to right, #4F46E5, #2563EB); /* variante pour le hover */
+  transform: scale(1.05);
+}
+
+.po{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto !important;
+}
+.counter-container {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  width: 140px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+height: 50px;
+  padding:0 1.5rem;
+  border-radius: 2rem;
+margin-top: 0.5rem;
+  
+}
+
+.counter-button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  font-weight: 300;
+  margin-bottom: 0.7rem;
+}
+
+.counter-button:hover {
+  color: #555;
+}
+
+.counter-value {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  font-weight: 400;
+}
+
+/*animation paragraphe de la section2*/
+.wave-word {
+  opacity: 0;
+  display: inline-block;
+  animation: waveAnimation 0.5s forwards;
+}
+
+@keyframes waveAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Styles par défaut --- */
+/* (votre CSS actuel reste inchangé ici) */
+
+/* --- Responsive design pour tablettes (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  header {
+    height: 80vh; /* Réduction de la hauteur du header */
+  }
+  .text h2 {
+    font-size: 2.5rem; /* Ajustement de la taille du titre */
+  }
+  .text p {
+    font-size: 1.4rem; /* Taille du paragraphe */
+  }
+  .img img {
+    height: 35vh; /* Réduction de la hauteur de l'image dans le header */
+    transform: rotate(-90deg); /* Conserver l'effet de rotation si nécessaire */
+  }
+  .container {
+    margin: 1rem; /* Réduction des marges pour mieux s’adapter */
+  }
+}
+
+/* --- Responsive design pour mobiles (max-width: 768px) --- */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column; /* Passage du menu en colonne */
+    align-items: center;
+  }
+  .container {
+    flex-direction: column; /* Les éléments se superposent verticalement */
+    text-align: center;
+  }
+  .text h2 {
+    font-size: 2rem;
+  }
+  .text p {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .img img {
+    height: 25vh; /* Ajustement pour les petits écrans */
+    transform: rotate(-90deg);
+  }
+  .contact-card {
+    grid-template-columns: 1fr; /* Une seule colonne pour la section contact */
+  }
+  .contact-left,
+  .contact-right {
+    min-width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .contact-right {
+    padding: 1rem; /* Moins de padding pour s’adapter aux écrans étroits */
+  }
+  /* Ajustement des vidéos et autres médias si besoin */
+  .video {
+    height: auto;
+  }
+}
+/* Pour les petits écrans (exemple : moins de 768px) */
+@media (max-width: 768px) {
+  /* Passe la section en une seule colonne */
+  .about {
+    grid-template-columns: 1fr;
+  }
+  /* S'assurer que chaque élément occupe toute la largeur */
+  .gauche,
+  .droit {
+    width: 100%;
+  }
+  /* Ordre : le texte en premier, puis l'image */
+  .gauche {
+    order: 1;
+  }
+  .droit {
+    order: 2;
+  }
+}

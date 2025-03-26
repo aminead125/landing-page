@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Cash on Delivery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Transition de la largeur de la sidebar */
+    .sidebar {
+      transition: width 0.3s ease;
+    }
+    /* Mode développé (par défaut) : largeur complète */
+    .sidebar.expanded {
+      width: 18rem;
+    }
+    /* Mode réduit : largeur minimale pour afficher les icônes */
+    .sidebar.collapsed {
+      width: 4rem;
+    }
+    /* Transition pour masquer/afficher le texte du menu */
+    .menu-text {
+      transition: opacity 0.3s ease;
+    }
+    /* En mode réduit, on masque le texte des éléments de menu */
+    .sidebar.collapsed .menu-text {
+      display: none;
+    }
+    /* En mode réduit, on masque l'icône COD Admin */
+    .sidebar.collapsed .cod-admin-icon {
+      display: none;
+    }
+    /* Ajustement du contenu principal en fonction de la sidebar */
+    .content-shifted {
+      transition: margin-left 0.3s ease;
+      margin-left: 18rem;
+    }
+    .content-collapsed {
+      transition: margin-left 0.3s ease;
+      margin-left: 4rem;
+    }
+    /* Nouveaux styles pour gérer les icônes en mode réduit */
+    .sidebar.collapsed .menu-icon {
+      margin-right: 0;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .sidebar a {
+      transition: all 0.3s ease;
+    }
+    .sidebar.collapsed a {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    /* Style pour le formulaire de modification, initialement caché */
+    #modifyProductForm {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar fixed left-0 top-0 bg-white text-gray-700 p-5 flex flex-col h-screen shadow-lg overflow-y-auto z-40 expanded">
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <svg class="w-8 h-8 text-blue-500 cod-admin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+          <line x1="2" y1="10" x2="22" y2="10"></line>
+        </svg>
+        <h2 class="text-2xl font-bold text-blue-500 menu-text">COD Admin</h2>
+      </div>
+      <button id="menu-btn" class="p-2 bg-gray-100 text-gray-700 rounded-lg" aria-label="Toggle menu">
+        &#9776;
+      </button>
+    </div>
+    <!-- Menu -->
+    <ul class="space-y-4">
+      <li>
+        <a href="#" data-page="dashboard" class="flex items-center px-4 py-3 rounded-lg bg-blue-100 text-blue-500">
+          <svg class="w-5 h-5 mr-3 menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="menu-text">Tableau de bord</span>
+        </a>
+      </li>
+      <li>
+        <a href="pages/Commandes.html" data-page="commandes" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-100 transition">
+          <svg class="w-5 h-5 mr-3 menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="menu-text">Commandes</span>
+        </a>
+      </li>
+      <li>
+        <a href="pages/livraisons.html" class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-100 transition">
+          <svg class="w-5 h-5 mr-3 menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          <span class="menu-text">Livraisons</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenu principal -->
+  <div id="main-content" class="p-8 content-shifted transition-all duration-300">
+    <header class="bg-white shadow-sm p-4 rounded-xl flex justify-between items-center mb-8">
+      <div class="relative w-1/3">
+        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Rechercher des commandes..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="relative p-2" aria-label="Notifications">
+          <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="absolute top-0 right-0 bg-red-500 text-white w-4 h-4 rounded-full text-xs flex items-center justify-center">3</span>
+        </button>
+        <div class="w-10 h-10 rounded-full bg-blue-100 overflow-hidden">
+          <img src="/api/placeholder/40/40" alt="Avatar" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </header>
+
+    <!-- Alerte de stock épuisé -->
+    <div id="stockAlert" class="mb-4 p-4 bg-red-100 text-red-800 rounded hidden">
+      Attention : Le stock du produit est épuisé !
+    </div>
+
+    <!-- Formulaire d'ajout de produit -->
+    <section class="bg-white p-6 rounded-xl shadow mb-8">
+      <h2 class="text-xl font-bold mb-6">Détails du produit</h2>
+      <form id="productForm">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Colonne image principale et miniatures -->
+          <div class="col-span-1">
+            <div class="border border-gray-200 rounded-lg p-4 mb-4">
+              <img id="previewImage" src="/api/placeholder/300/300" alt="Image principale du produit" class="w-full h-auto rounded-lg mb-4">
+              <label class="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer text-center block">
+                Changer l'image principale
+                <input type="file" name="main_image" class="hidden" accept="image/*" onchange="previewMainImage(event)">
+              </label>
+            </div>
+            <!-- Miniatures -->
+            <div class="grid grid-cols-3 gap-2">
+              <div class="border border-green-500 rounded-lg p-1 cursor-pointer">
+                <label class="cursor-pointer block">
+                  <img id="miniature1" src="/api/placeholder/80/80" alt="Miniature 1" class="w-full h-auto rounded">
+                  <input type="file" name="image1" accept="image/*" class="hidden" onchange="previewMiniature(1, event)">
+                </label>
+              </div>
+              <div class="border border-gray-200 rounded-lg p-1 cursor-pointer">
+                <label class="cursor-pointer block">
+                  <img id="miniature2" src="/api/placeholder/80/80" alt="Miniature 2" class="w-full h-auto rounded">
+                  <input type="file" name="image2" accept="image/*" class="hidden" onchange="previewMiniature(2, event)">
+                </label>
+              </div>
+              <div class="border border-gray-200 rounded-lg p-1 cursor-pointer">
+                <label class="cursor-pointer block">
+                  <img id="miniature3" src="/api/placeholder/80/80" alt="Miniature 3" class="w-full h-auto rounded">
+                  <input type="file" name="image3" accept="image/*" class="hidden" onchange="previewMiniature(3, event)">
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Colonne détails du produit -->
+          <div class="col-span-1 md:col-span-2 space-y-4">
+            <div>
+              <label for="product-name" class="block text-sm font-medium text-gray-700 mb-1">Nom du produit</label>
+              <input type="text" id="product-name" name="name" value="Montre Connectée Premium" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            <div>
+              <label for="product-slug" class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+              <input type="text" id="product-slug" name="slug" placeholder="exemple-mon-tre" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="regular-price" class="block text-sm font-medium text-gray-700 mb-1">Prix normal</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-2.5 text-gray-500">€</span>
+                  <input type="text" id="regular-price" name="price" value="249.99" class="w-full pl-8 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+              <div>
+                <label for="promo-price" class="block text-sm font-medium text-gray-700 mb-1">Prix promotionnel</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-2.5 text-gray-500">€</span>
+                  <input type="text" id="promo-price" name="promotional_price" value="149.99" class="w-full pl-8 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stock disponible</label>
+                <input type="number" id="stock" name="stock" value="78" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              </div>
+              <div>
+                <label for="delivery-time" class="block text-sm font-medium text-gray-700 mb-1">Délai de livraison (jours)</label>
+                <input type="number" id="delivery-time" name="delivery_time" value="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              </div>
+            </div>
+            <div>
+              <label for="short-description" class="block text-sm font-medium text-gray-700 mb-1">Description courte</label>
+              <textarea id="short-description" name="description" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="2">Montre connectée de qualité supérieure avec suivi de santé, notifications et 7 jours d'autonomie. Paiement à la livraison disponible.</textarea>
+            </div>
+            <!-- Formulaire secondaire pour les caractéristiques -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold">Caractéristiques principales</h3>
+              <div>
+                <label for="feature1" class="block text-sm font-medium text-gray-700 mb-1">Caractéristique 1</label>
+                <input type="text" id="feature1" name="feature1" placeholder="Exemple: Écran AMOLED HD" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              </div>
+              <div>
+                <label for="feature2" class="block text-sm font-medium text-gray-700 mb-1">Caractéristique 2</label>
+                <input type="text" id="feature2" name="feature2" placeholder="Exemple: Autonomie jusqu'à 7 jours" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              </div>
+              <div>
+                <label for="feature3" class="block text-sm font-medium text-gray-700 mb-1">Caractéristique 3</label>
+                <input type="text" id="feature3" name="feature3" placeholder="Exemple: Étanche jusqu'à 50 mètres" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">
+                Ajouter le produit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Bouton Modifier -->
+      <div class="mt-4">
+        <button id="modifierBtn" class="bg-green-500 text-white px-4 py-2 rounded-lg">Modifier le produit</button>
+      </div>
+
+      <!-- Formulaire de modification du produit -->
+      <form id="modifyProductForm">
+        <h3 class="text-lg font-semibold mb-4">Modifier les informations du produit</h3>
+        <div>
+          <label for="modify-name" class="block text-sm font-medium text-gray-700 mb-1">Nom du produit</label>
+          <input type="text" id="modify-name" name="name" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+        </div>
+        <div class="mt-4">
+          <label for="modify-slug" class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+          <input type="text" id="modify-slug" name="slug" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+        </div>
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          <div>
+            <label for="modify-price" class="block text-sm font-medium text-gray-700 mb-1">Prix normal</label>
+            <input type="text" id="modify-price" name="price" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+          </div>
+          <div>
+            <label for="modify-promotional_price" class="block text-sm font-medium text-gray-700 mb-1">Prix promotionnel</label>
+            <input type="text" id="modify-promotional_price" name="promotional_price" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          <div>
+            <label for="modify-stock" class="block text-sm font-medium text-gray-700 mb-1">Stock</label>
+            <input type="number" id="modify-stock" name="stock" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+          </div>
+          <div>
+            <label for="modify-delivery_time" class="block text-sm font-medium text-gray-700 mb-1">Délai de livraison (jours)</label>
+            <input type="number" id="modify-delivery_time" name="delivery_time" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+          </div>
+        </div>
+        <div class="mt-4">
+          <label for="modify-description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <textarea id="modify-description" name="description" class="w-full px-4 py-2 rounded-lg border border-gray-300" rows="3"></textarea>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Enregistrer les modifications</button>
+          <button type="button" id="cancelModify" class="ml-2 bg-gray-500 text-white px-4 py-2 rounded-lg">Annuler</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Section Commandes récentes -->
+    <div class="mb-8">
+      <section class="bg-white p-6 rounded-xl shadow overflow-x-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold">Commandes COD récentes</h2>
+          <a href="pages/Commandes.html" class="text-blue-500 hover:text-blue-700 flex items-center">
+            Voir tout
+            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="text-gray-500 border-b">
+              <th class="px-4 py-3 text-left font-medium">ID</th>
+              <th class="px-4 py-3 text-left font-medium">Client</th>
+              <th class="px-4 py-3 text-left font-medium">Quantité</th>
+              <th class="px-4 py-3 text-left font-medium">Montant</th>
+              <th class="px-4 py-3 text-left font-medium">Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Les commandes seront chargées ici -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Prévisualisation de l'image principale
+    function previewMainImage(event) {
+      const preview = document.getElementById('previewImage');
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    // Prévisualisation des miniatures
+    function previewMiniature(index, event) {
+      const preview = document.getElementById('miniature' + index);
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    // Basculement de la sidebar
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.getElementById('menu-btn');
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('main-content');
+      let isExpanded = true;
+      
+      menuBtn.addEventListener('click', function() {
+        if (isExpanded) {
+          sidebar.classList.remove('expanded');
+          sidebar.classList.add('collapsed');
+          mainContent.classList.remove('content-shifted');
+          mainContent.classList.add('content-collapsed');
+          isExpanded = false;
+        } else {
+          sidebar.classList.remove('collapsed');
+          sidebar.classList.add('expanded');
+          mainContent.classList.remove('content-collapsed');
+          mainContent.classList.add('content-shifted');
+          isExpanded = true;
+        }
+      });
+    });
+  </script>
+  <script>
+    // Gestion de la soumission du formulaire d'ajout de produit
+    const productForm = document.getElementById('productForm');
+    
+    productForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Collecte des données du formulaire
+      const formData = new FormData(productForm);
+      
+      // Récupération des fichiers d'images
+      const mainImage = document.querySelector('input[name="main_image"]').files[0];
+      const image1 = document.querySelector('input[name="image1"]').files[0];
+      const image2 = document.querySelector('input[name="image2"]').files[0];
+      const image3 = document.querySelector('input[name="image3"]').files[0];
+      
+      const images = [];
+      
+      // Fonction pour convertir une image en base64
+      const getBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          if (!file) {
+            resolve(null);
+            return;
+          }
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+        });
+      };
+      
+      try {
+        const mainImageBase64 = await getBase64(mainImage);
+        const image1Base64 = await getBase64(image1);
+        const image2Base64 = await getBase64(image2);
+        const image3Base64 = await getBase64(image3);
+        
+        if (mainImageBase64) images.push({ image_url: mainImageBase64, angle: 'principal' });
+        if (image1Base64) images.push({ image_url: image1Base64, angle: 'angle1' });
+        if (image2Base64) images.push({ image_url: image2Base64, angle: 'angle2' });
+        if (image3Base64) images.push({ image_url: image3Base64, angle: 'angle3' });
+        
+        // Récupération des caractéristiques
+        const feature1 = formData.get('feature1');
+        const feature2 = formData.get('feature2');
+        const feature3 = formData.get('feature3');
+        
+        const features = [feature1, feature2, feature3].filter(f => f && f.trim() !== '');
+        
+        const productData = {
+          name: formData.get('name'),
+          slug: formData.get('slug'),
+          price: formData.get('price'),
+          promotional_price: formData.get('promotional_price'),
+          stock: formData.get('stock'),
+          delivery_time: formData.get('delivery_time'),
+          description: formData.get('description'),
+          features,
+          images
+        };
+        
+        const response = await fetch('http://localhost:5000/api/produit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productData)
+        });
+        
+        const data = await response.json();
+        if (data.success) alert('Produit ajouté avec succès!');
+        else alert('Erreur lors de l\'ajout du produit: ' + data.message);
+      } catch (error) {
+        console.error('Erreur:', error);
+        alert('Erreur de connexion au serveur');
+      }
+    });
+  </script>
+  <script>
+    // Chargement des commandes récentes
+    async function loadCommandes() {
+      try {
+        const response = await fetch('http://localhost:5000/api/commande');
+        const result = await response.json();
+        if (result.success) {
+          const commandes = result.data;
+          const tableBody = document.querySelector('table tbody');
+          tableBody.innerHTML = '';
+          commandes.forEach(commande => {
+            const tr = document.createElement('tr');
+            tr.classList.add('hover:bg-gray-50', 'transition', 'border-b');
+            tr.innerHTML = `
+              <td class="px-4 py-4">#${commande.commande_id}</td>
+              <td class="px-4 py-4">${commande.nom} ${commande.prenom}</td>
+              <td class="px-4 py-4">${commande.quantite}</td>
+              <td class="px-4 py-4">${commande.montant_total ? commande.montant_total + ' DZD' : 'N/A'}</td>
+              <td class="px-4 py-4">
+                <span class="px-2 py-1 ${
+                  commande.statut_libelle === 'confirmée'
+                    ? 'bg-blue-100 text-blue-800'
+                    : commande.statut_libelle === 'En livraison'
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : 'bg-red-100 text-red-800'
+                } rounded-full text-xs font-medium">
+                  ${commande.statut_libelle || 'N/A'}
+                </span>
+              </td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        } else {
+          console.error("Erreur: ", result.message);
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement des commandes :", error);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadCommandes);
+  </script>
+  <script>
+    // Vérification du stock et affichage de l'alerte si stock épuisé
+    async function checkStock() {
+      try {
+        const response = await fetch('http://localhost:5000/api/produit');
+        const result = await response.json();
+        if (result.success) {
+          const currentStock = result.data.produit.stock;
+          const stockAlert = document.getElementById('stockAlert');
+          if (parseInt(currentStock) === 0) {
+            stockAlert.classList.remove('hidden');
+          } else {
+            stockAlert.classList.add('hidden');
+          }
+        }
+      } catch (error) {
+        console.error("Erreur lors de la vérification du stock :", error);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', checkStock);
+  </script>
+  <script>
+    // Gestion du formulaire de modification du produit
+    let currentProductId = null;
+    const modifierBtn = document.getElementById('modifierBtn');
+    const modifyForm = document.getElementById('modifyProductForm');
+    const cancelModify = document.getElementById('cancelModify');
+
+    // Charger dynamiquement les informations du produit et récupérer son id
+    async function loadProductInfo() {
+      try {
+        const response = await fetch('http://localhost:5000/api/produit');
+        const result = await response.json();
+        if (result.success) {
+          const produit = result.data.produit;
+          currentProductId = produit.id;
+          document.getElementById('modify-name').value = produit.name;
+          document.getElementById('modify-slug').value = produit.slug;
+          document.getElementById('modify-price').value = produit.price;
+          document.getElementById('modify-promotional_price').value = produit.promotional_price;
+          document.getElementById('modify-stock').value = produit.stock;
+          document.getElementById('modify-delivery_time').value = produit.delivery_time;
+          document.getElementById('modify-description').value = produit.description;
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement du produit :", error);
+      }
+    }
+
+    modifierBtn.addEventListener('click', function() {
+      loadProductInfo();
+      modifyForm.style.display = 'block';
+    });
+
+    cancelModify.addEventListener('click', function() {
+      modifyForm.style.display = 'none';
+    });
+
+    // Soumission du formulaire de modification
+    document.getElementById('modifyProductForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      try {
+        const name = document.getElementById('modify-name').value;
+        const slug = document.getElementById('modify-slug').value;
+        const price = document.getElementById('modify-price').value;
+        const promotional_price = document.getElementById('modify-promotional_price').value;
+        const stock = document.getElementById('modify-stock').value;
+        const delivery_time = document.getElementById('modify-delivery_time').value;
+        const description = document.getElementById('modify-description').value;
+        
+        if (!currentProductId) {
+          alert("Produit introuvable.");
+          return;
+        }
+        
+        const response = await fetch(`http://localhost:5000/api/produit/${currentProductId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, slug, price, promotional_price, stock, delivery_time, description })
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert("Produit mis à jour avec succès !");
+          modifyForm.style.display = 'none';
+          checkStock();
+        } else {
+          alert("Erreur lors de la mise à jour du produit : " + result.message);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la modification du produit :", error);
+        alert("Erreur lors de la modification du produit.");
+      }
+    });
+  </script>
+</body>
+</html>

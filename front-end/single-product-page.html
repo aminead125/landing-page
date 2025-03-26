@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Montres & Co - Élégance Intemporelle</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    /* Styles pour la zone contact */
+    .contact-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    #product-main-image img {
+      width: 100%;
+      max-width: 400px; /* ajustez selon vos besoins */
+      display: block;
+      margin: auto;
+    }
+    /* Conteneur pour les miniatures en dehors de .contact-left */
+    #product-thumbnails-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #product-thumbnails {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    #product-thumbnails img {
+      width: 80px;
+      height: auto;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      padding: 2px;
+      transition: transform 0.3s;
+    }
+    #product-thumbnails img:hover {
+      transform: scale(1.1);
+    }
+    #reset-main-image {
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      transition: background-color 0.3s;
+    }
+    #reset-main-image:hover {
+      background-color: #ddd;
+    }
+    /* Style pour la liste des features */
+    #features-about li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #494848;
+    }
+    #features-about li img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+    li .ic {
+      height: 35px;
+      width: 35px;
+      fill: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li data-aos="fade-right" data-aos-delay="100"><a href="#about">À propos</a></li>
+        <li data-aos="fade-right" data-aos-delay="200"><a href="#collection">Collections</a></li>
+        <li data-aos="fade-right" data-aos-delay="400"><a href="#contact">Produit</a></li>
+      </ul>
+      <div class="logo" data-aos="fade-right" data-aos-delay="500">
+        <p>Watch & Cool</p>
+      </div>
+      <div class="reseau" data-aos="fade-right" data-aos-delay="600">
+        <ul>
+          <li><a href="#"><img class="ic" src="images/insta.png" alt="insta"></a></li>
+          <li><a href="#"><img class="ic" src="images/face.png" alt="face"></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div>
+        <div class="text">
+          <!-- L'animation commence après celle de la navbar -->
+          <h2 data-aos="fade-down" data-aos-delay="1700">Affirmez votre style</h2>
+          <p data-aos="fade-down" data-aos-delay="1900">
+            Rehaussez votre élégance avec une montre qui raconte votre histoire.
+          </p>
+        </div>
+        <div class="img">
+          <img src="images/pic1.png" alt="Montre">
+        </div>
+        <div class="btn-pos">
+          <a href="#testimonials">
+            <button>Découvrez nos modèles</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Section À propos avec affichage dynamique des features et image principale -->
+  <section id="about" class="about">
+    <div class="gauche">
+      <div class="child-container">
+        <h4 class="roboto-mono-style" data-aos="fade-right" data-aos-duration="400" data-aos-delay="800">
+          Explore Functionality
+        </h4>
+        <h2 data-aos="fade-right" data-aos-duration="800" data-aos-delay="1200">
+          Caractéristiques principales
+        </h2>
+        <!-- Conteneur dynamique pour les caractéristiques -->
+        <ul id="features-about"></ul>
+      </div>
+    </div>
+    <!-- La zone de droite affichera l'image principale du produit -->
+    <div class="droit" data-aos="fade-left" data-aos-duration="1000">
+      <img id="about-main-image" src="" alt="Montre">
+    </div>
+  </section>
+  
+  <section id="collection" class="section2">
+    <h2 data-aos="fade-down" data-aos-duration="1000">
+      Construit pour durer
+    </h2>
+    <p id="collection-paragraph">
+      Nos montres sont conçues pour résister aux aléas du quotidien. Grâce à une fabrication minutieuse et des matériaux de qualité supérieure, chaque modèle offre robustesse et élégance intemporelle. Que ce soit pour accompagner vos aventures quotidiennes ou sublimer vos moments d'exception, elles incarnent l'alliance parfaite entre tradition et innovation, véritable gage de durabilité.
+    </p>
+    <div class="cardv">
+      <video class="video" controls fullscreen>
+        <source src="images/vid1.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+    </div>
+  </section>
+  
+  <section id="contact" class="contact-card">
+    <div class="contact-left">
+      <!-- Conteneur pour l'image principale dans la zone de contact -->
+      <div id="product-main-image"></div>
+    </div>
+    <div class="contact-right">
+      <div class="info">
+        <div class="t">
+          <!-- Ces éléments seront mis à jour dynamiquement -->
+          <h2 id="product-name">Nom du produit</h2>
+        </div>
+        <!-- Mise à jour de la description -->
+        <p id="product-description">
+          Description du produit. La description sera remplacée par les informations récupérées depuis la base de données.
+        </p>
+        <p class="p"><strong class="pri">Prix</strong> <span id="prix-unitaire">0</span> DZD</p>
+        <div class="po">
+          <div class="counter-container">
+            <button class="counter-button" id="decrease">−</button>
+            <div class="counter-value" id="value">1</div>
+            <button class="counter-button" id="increase">+</button>
+          </div>
+          <button class="contact-button" id="acheter-button">Acheter maintenant !</button>
+        </div>
+        <div class="form-container">
+          <div class="card">
+            <h2>Paiement à la Livraison</h2>
+            <form id="order-form">
+              <div class="row">
+                <input type="text" id="nom" placeholder="Nom" required>
+                <input type="text" id="prenom" placeholder="Prénom" required>
+              </div>
+              <input type="tel" id="telephone" placeholder="Téléphone" required>
+              <select id="willaya" required>
+                <option value="" disabled selected>Sélectionnez votre willaya</option>
+                <option value="Alger">Alger</option>
+                <option value="Oran">Oran</option>
+                <option value="Constantine">Constantine</option>
+                <option value="Annaba">Annaba</option>
+                <option value="Autre">Autre</option>
+              </select>
+              <select id="province" required>
+                <option value="" disabled selected>Sélectionnez la province</option>
+                <option value="Boudouaou">Boudouaou</option>
+                <option value="Corso">Corso</option>
+              </select>
+              <input type="text" id="adresse" placeholder="Adresse de livraison" required>
+              <textarea id="message" placeholder="Message (optionnel)"></textarea>
+              <div class="commande-recap">
+                <p>Quantité: <span id="recap-quantite">1</span></p>
+                <p>Montant total: <span id="recap-montant">0</span></p>
+              </div>
+              <!-- Ajout de l'id "submit-order" pour pouvoir le désactiver -->
+              <button type="submit" id="submit-order">Confirmer la commande</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Conteneur pour les miniatures et bouton de réinitialisation -->
+    <div id="product-thumbnails-container">
+      <div id="product-thumbnails"></div>
+      <button id="reset-main-image">Réinitialiser l'image principale</button>
+    </div>
+  </section>
+
+  
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: false
+    });
+  </script>
+  
+  <!-- Script combiné pour le compteur, le calcul du montant total, la vérification du stock et la récupération des détails du produit -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const decreaseBtn = document.getElementById("decrease");
+      const increaseBtn = document.getElementById("increase");
+      const valueEl = document.getElementById("value");
+      const recapQuantite = document.getElementById("recap-quantite");
+      const recapMontant = document.getElementById("recap-montant");
+      const prixUnitaireEl = document.getElementById("prix-unitaire");
+      const submitOrderBtn = document.getElementById("submit-order");
+      
+      // Initialisation du prix unitaire à partir du DOM (sera mis à jour après le fetch)
+      let prixUnitaire = parseInt(prixUnitaireEl.textContent) || 0;
+      // Variable pour stocker le stock disponible (récupéré depuis la BDD)
+      let stockDisponible = 0;
+      
+      function updateRecap() {
+        const quantite = parseInt(valueEl.textContent);
+        const montantTotal = prixUnitaire * quantite;
+        recapQuantite.textContent = quantite;
+        recapMontant.textContent = montantTotal + " DZD";
+        // Vérification : si la quantité dépasse le stock, désactiver le bouton de confirmation
+        if (quantite > stockDisponible) {
+          submitOrderBtn.disabled = true;
+        } else {
+          submitOrderBtn.disabled = false;
+        }
+      }
+      
+      decreaseBtn.addEventListener("click", function() {
+        let value = parseInt(valueEl.textContent);
+        if (value > 1) {
+          valueEl.textContent = value - 1;
+          updateRecap();
+        }
+      });
+      
+      increaseBtn.addEventListener("click", function() {
+        let value = parseInt(valueEl.textContent);
+        valueEl.textContent = value + 1;
+        updateRecap();
+      });
+      
+      document.getElementById("acheter-button").addEventListener("click", function() {
+        document.querySelector(".form-container").style.display = "block";
+        document.querySelector(".form-container").scrollIntoView({ behavior: "smooth" });
+      });
+      
+      document.getElementById("order-form").addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const quantite = parseInt(document.getElementById("value").textContent);
+        const montantTotal = prixUnitaire * quantite;
+  
+        const formData = {
+          nom: document.getElementById("nom").value,
+          prenom: document.getElementById("prenom").value,
+          telephone: document.getElementById("telephone").value,
+          willaya: document.getElementById("willaya").value,
+          province: document.getElementById("province").value,
+          adresse: document.getElementById("adresse").value,
+          message: document.getElementById("message").value,
+          quantite: quantite,
+          montant_total: montantTotal
+        };
+  
+        try {
+          const response = await fetch("http://localhost:5000/api/commande", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+          });
+  
+          const result = await response.json();
+          
+          if (result.success) {
+            alert("Commande confirmée avec succès !");
+            document.getElementById("order-form").reset();
+            document.getElementById("value").textContent = "1";
+            updateRecap();
+          } else {
+            alert("Erreur lors de l'envoi de la commande.");
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          alert("Problème de connexion au serveur.");
+        }
+      });
+  
+      // Récupération des détails du produit, images et features
+      fetch("http://localhost:5000/api/produit")
+        .then(response => response.json())
+        .then(data => {
+          if(data.success && data.data.produit) {
+            const produit = data.data.produit;
+            const images = data.data.images; // tableau d’images
+            const features = data.data.features; // tableau de features
+            
+            // Récupération du stock disponible depuis le produit
+            stockDisponible = parseInt(produit.stock) || 0;
+            
+            // Mise à jour des informations principales
+            document.getElementById("product-name").textContent = produit.name;
+            document.getElementById("prix-unitaire").textContent = produit.price;
+            document.getElementById("product-description").textContent = produit.description;
+            if(produit.color) {
+              document.getElementById("product-color").textContent = produit.color;
+            }
+            
+            // Mise à jour du prix unitaire et rafraîchissement du récapitulatif
+            prixUnitaire = parseInt(produit.price) || 0;
+            updateRecap();
+            
+            // Affichage de l'image principale dans la zone contact
+            if (images && images.length > 0) {
+              const mainImageContainer = document.getElementById("product-main-image");
+              const thumbnailsContainer = document.getElementById("product-thumbnails");
+              mainImageContainer.innerHTML = "";
+              thumbnailsContainer.innerHTML = "";
+              
+              // La première image est utilisée comme image principale
+              const mainImg = document.createElement("img");
+              mainImg.src = images[0].image_url;
+              mainImg.alt = "Image principale du produit";
+              mainImageContainer.appendChild(mainImg);
+  
+              // Mise à jour de l'image principale dans la section "À propos" (droit)
+              const aboutMainImage = document.getElementById("about-main-image");
+              if (aboutMainImage) {
+                aboutMainImage.src = images[0].image_url;
+                aboutMainImage.alt = "Image principale du produit";
+              }
+              
+              // Stocker la source d'origine pour pouvoir réinitialiser
+              const originalMainSrc = images[0].image_url;
+              
+              // Création des miniatures (si plus d'une image)
+              if(images.length > 1) {
+                images.slice(1).forEach(img => {
+                  const thumbImg = document.createElement("img");
+                  thumbImg.src = img.image_url;
+                  thumbImg.alt = "Miniature du produit";
+                  thumbImg.addEventListener("click", function() {
+                    mainImg.src = img.image_url;
+                    if (aboutMainImage) {
+                      aboutMainImage.src = img.image_url;
+                    }
+                  });
+                  thumbnailsContainer.appendChild(thumbImg);
+                });
+              }
+              
+              // Bouton de réinitialisation pour remettre l'image principale d'origine
+              document.getElementById("reset-main-image").addEventListener("click", function() {
+                mainImg.src = originalMainSrc;
+                if (aboutMainImage) {
+                  aboutMainImage.src = originalMainSrc;
+                }
+              });
+            }
+  
+            // Affichage des features dans la section "À propos"
+            if (features && features.length > 0) {
+              const featuresContainer = document.getElementById("features-about");
+              featuresContainer.innerHTML = "";
+              
+              features.forEach((feature, index) => {
+                const li = document.createElement("li");
+                li.setAttribute("data-aos", "fade-right");
+                li.setAttribute("data-aos-duration", "800");
+                li.setAttribute("data-aos-delay", 1400 + index * 200);
+                
+                // Sélection de l'icône selon l'index
+                let iconSrc = "";
+                if (index === 0) {
+                  iconSrc = "images/Icon01.png";
+                } else if (index === 1) {
+                  iconSrc = "images/Icon03.png";
+                } else {
+                  iconSrc = "images/Icon02.png";
+                }
+                
+                const icon = document.createElement("img");
+                icon.src = iconSrc;
+                icon.alt = "Feature Icon";
+                icon.style.width = "40px";
+                icon.style.height = "40px";
+                icon.style.marginRight = "8px";
+                
+                li.appendChild(icon);
+                li.appendChild(document.createTextNode(feature));
+                featuresContainer.appendChild(li);
+              });
+            }
+          }
+        })
+        .catch(error => console.error("Erreur lors du fetch du produit :", error));
+  
+      updateRecap();
+    });
+  </script>
+</body>
+</html>
