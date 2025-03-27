@@ -69,21 +69,62 @@
       height: 20px;
       margin-right: 8px;
     }
-    li .ic {
-      height: 35px;
-      width: 35px;
-      fill: #ff0000;
+    @media (max-width: 1024px) {
+      .about {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+      #features-about li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #494848;
+    }
+    #features-about li img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+    }
+    @media (max-width: 768px) {
+      .about {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+      #features-about li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #494848;
+    }
     }
   </style>
 </head>
 <body>
   <header>
     <nav>
-      <ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Liens de navigation -->
+      <ul class="nav-links">
         <li data-aos="fade-right" data-aos-delay="100"><a href="#about">À propos</a></li>
         <li data-aos="fade-right" data-aos-delay="200"><a href="#collection">Collections</a></li>
         <li data-aos="fade-right" data-aos-delay="400"><a href="#contact">Produit</a></li>
       </ul>
+      
       <div class="logo" data-aos="fade-right" data-aos-delay="500">
         <p>Watch & Cool</p>
       </div>
@@ -94,6 +135,16 @@
         </ul>
       </div>
     </nav>
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn">&times;</span>
+      </div>
+      <ul class="sidebar-links">
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#collection">Collections</a></li>
+        <li><a href="#contact">Produit</a></li>
+      </ul>
+    </div>
     <div class="container">
       <div>
         <div class="text">

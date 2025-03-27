@@ -54,4 +54,26 @@ document.addEventListener("DOMContentLoaded", function() {
   observer.observe(collectionSection);
 });
 
+document.addEventListener('DOMContentLoaded', function(){
+  const hamburger = document.querySelector('.hamburger');
+  const sidebar = document.getElementById('sidebar');
+  const closeBtn = document.querySelector('.close-btn');
 
+  // Ouvrir la sidebar lors du clic sur le hamburger
+  hamburger.addEventListener('click', function(){
+    sidebar.classList.add('active');
+  });
+
+  // Fermer la sidebar lors du clic sur le bouton de fermeture
+  closeBtn.addEventListener('click', function(){
+    sidebar.classList.remove('active');
+  });
+
+  // Optionnel : fermer la sidebar lors du clic sur un lien
+  const sidebarLinks = document.querySelectorAll('.sidebar-links li a');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', function(){
+      sidebar.classList.remove('active');
+    });
+  });
+});

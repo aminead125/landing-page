@@ -22,12 +22,14 @@ header{
   height: 100vh;
   z-index: 0;
 }
-header nav{
+header nav {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   padding: 1.7rem;
 }
+
 header nav ul{
   display: flex;
 }
@@ -108,15 +110,12 @@ background-color: #002B4B;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 83vh;
     margin-right: 1rem;
     margin-top: 1rem;
   }
 .about{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-content: center;
+  display: flex;
   margin: 4rem 1.7rem;
   gap: 2rem;
   background-color: #cfe8f5;
@@ -158,8 +157,8 @@ background-color: #002B4B;
       height: auto !important;
       filter: invert(23%) sepia(79%) saturate(1581%) hue-rotate(171deg) brightness(91%) contrast(86%);
         }
-.gauche ul li span img.ic3{
-  width: 46px;
+.gauche ul li span img .ic{
+  max-width: 46px;
       height: auto !important;
 }
 .gauche ul li div h4 {
@@ -184,7 +183,7 @@ background-color: #002B4B;
     .img img {
       position: absolute;
       width: auto !important;
-      height: 45vh;
+      max-height: 45vh;
       transform: rotate(-90deg);  
       z-index: -1;
     }
@@ -344,26 +343,7 @@ text-align: center;
   background-color: #296ce8;     
 }
 
-/* --- Adaptation pour petits écrans --- */
-@media (max-width: 768px) {
-  .contact-card {
-    grid-template-columns: 1fr;           /* Passe en une colonne sur mobile */
-  }
-  .contact-left,
-  .contact-right {
-    min-width: 100%;
-    justify-content: center;              /* Centrer sur mobile */
-    align-items: center;
-  }
-  /* Réajustement du texte en mode colonne */
-  .contact-right {
-    align-items: center;                 
-  }
-  .contact-right h2,
-  .contact-right p {
-    text-align: center;                   /* Au centre sur mobile */
-  }
-}
+
 
 /* Carte du formulaire */
 .form-container .card {
@@ -532,83 +512,198 @@ margin-top: 0.5rem;
   }
 }
 
-/* --- Styles par défaut --- */
-/* (votre CSS actuel reste inchangé ici) */
-
-/* --- Responsive design pour tablettes (max-width: 1024px) --- */
+/* Écrans moyens (tablettes et petits ordinateurs) */
 @media (max-width: 1024px) {
-  header {
-    height: 80vh; /* Réduction de la hauteur du header */
+  header nav ul li {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+  .logo p {
+    font-size: 1.2rem;
+    margin-right: 1rem;
   }
   .text h2 {
-    font-size: 2.5rem; /* Ajustement de la taille du titre */
-  }
-  .text p {
-    font-size: 1.4rem; /* Taille du paragraphe */
-  }
-  .img img {
-    height: 35vh; /* Réduction de la hauteur de l'image dans le header */
-    transform: rotate(-90deg); /* Conserver l'effet de rotation si nécessaire */
-  }
-  .container {
-    margin: 1rem; /* Réduction des marges pour mieux s’adapter */
-  }
-}
-
-/* --- Responsive design pour mobiles (max-width: 768px) --- */
-@media (max-width: 768px) {
-  header nav ul {
-    flex-direction: column; /* Passage du menu en colonne */
-    align-items: center;
-  }
-  .container {
-    flex-direction: column; /* Les éléments se superposent verticalement */
-    text-align: center;
-  }
-  .text h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   .text p {
     font-size: 1.2rem;
-    text-align: center;
   }
-  .img img {
-    height: 25vh; /* Ajustement pour les petits écrans */
-    transform: rotate(-90deg);
+  .container {
+    margin: 1rem;
+  }
+  .btn-pos button {
+    margin-top: 3.5rem;
   }
   .contact-card {
-    grid-template-columns: 1fr; /* Une seule colonne pour la section contact */
+    grid-template-columns: 1fr;
+    margin: 0 1.8rem;
   }
-  .contact-left,
-  .contact-right {
-    min-width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  .contact-right {
-    padding: 1rem; /* Moins de padding pour s’adapter aux écrans étroits */
-  }
-  /* Ajustement des vidéos et autres médias si besoin */
-  .video {
-    height: auto;
+  .about{
+    display: flex !important;
   }
 }
-/* Pour les petits écrans (exemple : moins de 768px) */
+
+/* Petits écrans (tablettes en orientation portrait et mobiles) */
 @media (max-width: 768px) {
-  /* Passe la section en une seule colonne */
-  .about {
+  /* Réorganisation du header */
+  header nav {
+    flex-direction: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  header nav ul {
+    flex-direction: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  header nav ul li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+  .logo p {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .reseau ul {
+    margin-top: 0.5rem;
+  }
+  .ic{
+    margin: 0.2rem;
+  }
+  /* Ajustement des textes dans le header */
+  .text h2 {
+    font-size: 2.4rem;
+    text-align: center;
+  }
+  .text p {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  .container {
+    margin: 0.5rem;
+    padding: 0;
+  }
+  .img img {
+    max-height: 40vh;
+  }
+  .btn-pos button {
+    margin-bottom: 5.5rem;
+  }
+  /* Réorganisation de la section contact */
+  .contact-card {
     grid-template-columns: 1fr;
   }
-  /* S'assurer que chaque élément occupe toute la largeur */
-  .gauche,
-  .droit {
-    width: 100%;
+  .contact-right {
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
   }
-  /* Ordre : le texte en premier, puis l'image */
-  .gauche {
-    order: 1;
+}
+@media (max-width: 480px) {
+  header {
+    margin: 0.5rem;
+    height: auto;
   }
-  .droit {
-    order: 2;
+  header nav {
+    padding: 0.5rem;
+  }
+  header nav ul li a {
+    font-size: 0.9rem;
+  }
+
+  .text h2 {
+    font-size: 1.8rem;
+  }
+  .text p {
+    font-size: 0.9rem;
+  }
+  .btn-pos {
+    margin-top: 0.5rem;
+  }
+  .container div button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  .cardv {
+    width: 95%;
+    margin: 2rem auto;
+  }
+}
+
+/* Bouton hamburger visible sur petits écrans */
+.hamburger {
+  display: none; /* Caché par défaut sur grand écran */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 5px;
+}
+
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Hors de l'écran */
+  width: 250px;
+  height: 100%;
+  background-color: #ffffff; /* Couleur de fond */
+  padding: 1rem;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* Affichage de la sidebar active */
+#sidebar.active {
+  left: 0;
+}
+
+/* Header de la sidebar avec bouton de fermeture */
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  font-size: 2rem;
+  color: #333333;
+  cursor: pointer;
+}
+
+/* Liens de la sidebar */
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.sidebar-links li {
+  margin: 1rem 0;
+}
+
+.sidebar-links li a {
+  color: #333333;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.sidebar-links li a:hover {
+  color: #ddd;
+}
+
+/* Responsive : Afficher le hamburger et masquer la sidebar sur grand écran */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  /* Optionnel : masquer les liens de navigation standards */
+  ul.nav-links {
+    display: none;
   }
 }
